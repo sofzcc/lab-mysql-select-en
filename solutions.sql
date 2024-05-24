@@ -43,10 +43,10 @@ LIMIT 3;
 
 -- Challenge 4-- 
 
-SELECT authors.au_id "AUTHOR ID", authors.au_lname "LAST NAME", authors.au_fname "FIRST NAME", COALESCE(COUNT(titles.title_id),0) AS Total 
+SELECT authors.au_id "AUTHOR ID", authors.au_lname "LAST NAME", authors.au_fname "FIRST NAME", COALESCE(COUNT(titles.title_id),0) "TOTAL"
 FROM titleauthor AS ta
 INNER JOIN authors ON ta.au_id = authors.au_id
 INNER JOIN titles ON ta.title_id = titles.title_id
 INNER JOIN publishers ON titles.pub_id = publishers.pub_id
 GROUP BY ta.au_id
-ORDER BY COUNT(titles.title_id) DESC;
+ORDER BY COALESCE(COUNT(titles.title_id),0)  DESC;
